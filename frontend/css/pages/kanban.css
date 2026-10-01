@@ -1,0 +1,49 @@
+/* ═══════════════════════════════════════════════
+   KANBAN BOARD
+═══════════════════════════════════════════════ */
+.kanban-scroll{overflow-x:auto;padding-bottom:20px}
+.kanban-board{display:flex;gap:12px;min-width:max-content;align-items:flex-start}
+.k-col{
+  width:256px;flex-shrink:0;
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--r2);display:flex;flex-direction:column;
+  min-height:440px;
+}
+.k-col-hd{
+  padding:12px 14px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:8px;
+}
+.k-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.k-title{font-family:'Fraunces',serif;font-size:12px;font-weight:600;flex:1;color:var(--text)}
+.k-count{
+  font-size:10px;font-weight:700;
+  background:var(--bg4);color:var(--text2);
+  padding:2px 8px;border-radius:10px;
+}
+.k-cards{padding:8px;flex:1;display:flex;flex-direction:column;gap:7px;min-height:80px}
+.k-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:9px;padding:12px;
+  cursor:grab;transition:all .17s;
+}
+.k-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:var(--shadow)}
+.k-card.dragging{opacity:.45;cursor:grabbing}
+.k-card-co{font-size:12px;font-weight:700;margin-bottom:2px;color:var(--text)}
+.k-card-role{font-size:11px;color:var(--text2);margin-bottom:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.k-card-ft{display:flex;align-items:center;justify-content:space-between}
+.k-card-date{font-size:10px;color:var(--text3)}
+.k-card-logo{width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700}
+.k-add-btn{
+  margin:6px 8px 8px;width:calc(100% - 16px);
+  padding:7px;border-radius:7px;
+  border:1px dashed var(--border2);background:none;
+  color:var(--text3);font-size:12px;cursor:pointer;
+  transition:all .13s;
+}
+.k-add-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(30,58,95,.04)}
+.k-drop-zone{
+  border:1px dashed var(--accent);background:rgba(30,58,95,.04);
+  border-radius:9px;height:52px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:var(--accent);
+}

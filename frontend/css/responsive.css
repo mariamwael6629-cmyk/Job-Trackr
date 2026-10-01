@@ -1,0 +1,26 @@
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media(max-width:900px){
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .charts-row,.activity-row,.feat-grid,.testi-grid,.pricing-grid,.ai-grid,.profile-grid{grid-template-columns:1fr}
+  .footer{grid-template-columns:1fr 1fr}
+}
+@media(max-width:700px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:none}
+  .main{margin-left:0}
+  .menu-btn{display:flex}
+  .hero-h1{font-size:36px}
+  .hero{padding:52px 22px 44px}
+  .section{padding:46px 22px}
+  .footer{grid-template-columns:1fr;padding:32px 22px}
+  .footer-bottom{padding:14px 22px;flex-direction:column;gap:6px;text-align:center}
+  .form-row{grid-template-columns:1fr}
+  .search-wrap{display:none}
+}
+.sidebar-backdrop{
+  position:fixed;inset:0;background:rgba(18,32,46,.45);z-index:199;
+  display:none;
+}
+.sidebar-backdrop.show{display:block}

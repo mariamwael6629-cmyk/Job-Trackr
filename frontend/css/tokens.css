@@ -1,0 +1,29 @@
+/* ═══════════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════════ */
+:root {
+  --bg:        #F4F2ED;
+  --bg2:       #FFFFFF;
+  --bg3:       #EDEAE4;
+  --bg4:       #E4E0D8;
+  --border:    #E9E5DC;
+  --border2:   #D5D0C6;
+  --text:      #16181D;
+  --text2:     #5A6272;
+  --text3:     #9BA0AE;
+  --accent:    #1E3A5F;
+  --accent2:   #2A5298;
+  --accent3:   #142B47;
+  --sidebar-bg:#12202E;
+  --amber:     #E8A838;
+  --green:     #1A8A5C;
+  --red:       #D94545;
+  --pink:      #9B4DCA;
+  --cyan:      #0E7490;
+  --blue:      #1A64C4;
+  --r:  10px;
+  --r2: 14px;
+  --r3: 20px;
+  --shadow: 0 4px 24px rgba(18,32,46,0.10);
+  --sidebar-w: 220px;
+}

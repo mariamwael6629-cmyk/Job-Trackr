@@ -1,0 +1,39 @@
+/* ═══════════════════════════════════════════════
+   DASHBOARD
+═══════════════════════════════════════════════ */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.stat-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--r2);padding:20px;
+  position:relative;overflow:hidden;
+  transition:border-color .2s,transform .2s,box-shadow .2s;cursor:default;
+}
+.stat-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:var(--shadow)}
+.stat-glow{
+  position:absolute;top:-20px;right:-20px;
+  width:70px;height:70px;border-radius:50%;
+  filter:blur(26px);opacity:.2;pointer-events:none;
+}
+.stat-emoji{font-size:20px;margin-bottom:12px;line-height:1}
+.stat-num{font-family:'Fraunces',serif;font-size:32px;font-weight:700;line-height:1;margin-bottom:2px}
+.stat-lbl{font-size:12px;color:var(--text2);font-weight:500}
+.stat-chg{font-size:11px;margin-top:7px;display:flex;align-items:center;gap:3px;font-weight:600}
+.chg-up{color:var(--green)}.chg-down{color:var(--red)}
+
+.charts-row{display:grid;grid-template-columns:3fr 2fr;gap:14px;margin-bottom:20px}
+.activity-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+
+/* ACTIVITY FEED */
+.feed-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
+.feed-item:last-child{border:none;padding-bottom:0}
+.feed-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.feed-body{flex:1;min-width:0}
+.feed-text{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text)}
+.feed-time{font-size:11px;color:var(--text3);margin-top:2px}
+.feed-badge{font-size:10px;font-weight:600;padding:2px 9px;border-radius:20px;flex-shrink:0}
+
+/* PROGRESS SECTION */
+.prog-row{margin-bottom:13px}
+.prog-hd{display:flex;justify-content:space-between;margin-bottom:4px}
+.prog-label{font-size:12px;color:var(--text2);font-weight:500}
+.prog-val{font-size:12px;font-weight:700;color:var(--text)}

@@ -45,7 +45,12 @@ Job-Trackr/
 │   ├── .env.example           # Copy to .env and fill in
 │   └── .gitignore
 └── frontend/
-    ├── index.html             # The full app (markup, styles, JS)
+    ├── index.html             # App markup shell
+    ├── css/                   # tokens, base, layout, components, pages/*, modal, feedback, responsive
+    ├── js/
+    │   ├── core/              # store, api client, navigation, toast, helpers
+    │   ├── features/          # auth, applications, kanban, charts, ai-tools, add-job modal, ui toggles
+    │   └── main.js            # DOMContentLoaded boot
     └── vendor/
         └── chart.umd.js       # Chart.js, vendored locally
 ```
@@ -86,7 +91,7 @@ Interactive API docs are available at **http://localhost:8000/docs** (Swagger UI
 
 ### Running the frontend separately (optional)
 
-If you prefer to serve `frontend/index.html` with a separate static server (e.g. VS Code Live Server), the backend's CORS settings already allow this — just update `CORS_ORIGINS` in `backend/.env` to include the frontend's origin, and edit `API_BASE` near the top of the `<script>` block in `frontend/index.html` to point at the backend's URL.
+If you prefer to serve `frontend/index.html` with a separate static server (e.g. VS Code Live Server), the backend's CORS settings already allow this — just update `CORS_ORIGINS` in `backend/.env` to include the frontend's origin, and edit `API_BASE` in `frontend/js/core/api.js` to point at the backend's URL.
 
 ## 📖 How It Works
 
