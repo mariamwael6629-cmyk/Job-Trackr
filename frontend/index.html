@@ -5,37 +5,42 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>JobTrackr — AI-Powered Job Application Tracker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400..900;1,400..700&display=swap" rel="stylesheet"/>
 <script src="vendor/chart.umd.js"></script>
 <style>
 /* ═══════════════════════════════════════════════
    DESIGN TOKENS
 ═══════════════════════════════════════════════ */
 :root {
-  --bg:        #F4F2ED;
+  /* "Filing cabinet" system: office-grey ground, manila folders, coloured
+     file tabs for status, steel-navy cabinet for the sidebar. See DESIGN.md. */
+  --bg:        #F0F1EE;
   --bg2:       #FFFFFF;
-  --bg3:       #EDEAE4;
-  --bg4:       #E4E0D8;
-  --border:    #E9E5DC;
-  --border2:   #D5D0C6;
-  --text:      #16181D;
-  --text2:     #5A6272;
-  --text3:     #9BA0AE;
-  --accent:    #1E3A5F;
-  --accent2:   #2A5298;
-  --accent3:   #142B47;
-  --sidebar-bg:#12202E;
-  --amber:     #E8A838;
-  --green:     #1A8A5C;
-  --red:       #D94545;
-  --pink:      #9B4DCA;
+  --bg3:       #E7E9E4;
+  --bg4:       #DADDD6;
+  --border:    #DDE0DA;
+  --border2:   #C6CAC2;
+  --text:      #15181C;
+  --text2:     #4B5260;
+  --text3:     #6B7280;
+  --accent:    #1F3A5C;
+  --accent2:   #2B5188;
+  --accent3:   #152A44;
+  --sidebar-bg:#16263A;
+  --manila:    #EDDCA9;
+  --manila2:   #E2CC8C;
+  --manila-ink:#4A3A12;
+  --amber:     #C98A12;
+  --green:     #1A7F52;
+  --red:       #C8372F;
+  --pink:      #8E3FBF;
   --cyan:      #0E7490;
-  --blue:      #1A64C4;
-  --r:  10px;
-  --r2: 14px;
-  --r3: 20px;
-  --shadow: 0 4px 24px rgba(18,32,46,0.10);
-  --sidebar-w: 220px;
+  --blue:      #1E5FB8;
+  --r:  4px;
+  --r2: 6px;
+  --r3: 8px;
+  --shadow: 0 10px 24px -14px rgba(22,38,58,0.35);
+  --sidebar-w: 236px;
 }
 
 /* ═══════════════════════════════════════════════
@@ -43,8 +48,8 @@
 ═══════════════════════════════════════════════ */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 html{scroll-behavior:smooth}
-body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;line-height:1.5}
-h1,h2,h3,h4,h5{font-family:'Fraunces',serif;line-height:1.15}
+body{font-family:'Public Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;line-height:1.5}
+h1,h2,h3,h4,h5{font-family:'Public Sans',sans-serif;line-height:1.15}
 a{color:inherit;text-decoration:none}
 button,input,select,textarea{font-family:inherit}
 img{display:block;max-width:100%}
@@ -76,9 +81,9 @@ img{display:block;max-width:100%}
   width:32px;height:32px;border-radius:8px;flex-shrink:0;
   background:var(--amber);
   display:flex;align-items:center;justify-content:center;
-  font-family:'Fraunces',serif;font-weight:800;font-size:13px;color:var(--sidebar-bg);
+  font-family:'Public Sans',sans-serif;font-weight:800;font-size:13px;color:var(--sidebar-bg);
 }
-.logo-text{font-family:'Fraunces',serif;font-weight:700;font-size:15px;letter-spacing:-.2px;color:#fff}
+.logo-text{font-family:'Public Sans',sans-serif;font-weight:700;font-size:15px;letter-spacing:-.2px;color:#fff}
 .logo-sub{font-size:9px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--amber);margin-top:1px}
 
 .sidebar-nav{padding:10px 8px;flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:1px}
@@ -134,7 +139,7 @@ img{display:block;max-width:100%}
   display:flex;align-items:center;gap:14px;
   position:sticky;top:0;z-index:100;
 }
-.topbar-title{font-family:'Fraunces',serif;font-size:14px;font-weight:600;flex:1;color:var(--text)}
+.topbar-title{font-family:'Public Sans',sans-serif;font-size:14px;font-weight:600;flex:1;color:var(--text)}
 .search-wrap{
   display:flex;align-items:center;gap:8px;
   background:var(--bg3);border:1px solid var(--border2);
@@ -155,7 +160,7 @@ img{display:block;max-width:100%}
   display:inline-flex;align-items:center;gap:6px;
   padding:7px 16px;border-radius:8px;border:none;
   font-size:13px;font-weight:600;cursor:pointer;
-  transition:all .15s;user-select:none;font-family:'Plus Jakarta Sans',sans-serif;
+  transition:all .15s;user-select:none;font-family:'Public Sans',sans-serif;
 }
 .btn-primary{
   background:var(--accent);
@@ -189,7 +194,7 @@ img{display:block;max-width:100%}
 .page.active{display:block;animation:pageIn .2s ease}
 @keyframes pageIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .page-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap}
-.page-title{font-family:'Fraunces',serif;font-size:24px;font-weight:700;margin-bottom:3px}
+.page-title{font-family:'Public Sans',sans-serif;font-size:24px;font-weight:700;margin-bottom:3px}
 .page-sub{font-size:13px;color:var(--text2)}
 
 /* ═══════════════════════════════════════════════
@@ -203,7 +208,7 @@ img{display:block;max-width:100%}
 .card:hover{border-color:var(--border2)}
 .card-pad{padding:20px}
 .card-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-.card-title{font-family:'Fraunces',serif;font-size:15px;font-weight:600}
+.card-title{font-family:'Public Sans',sans-serif;font-size:15px;font-weight:600}
 
 /* STATUS BADGES */
 .status{
@@ -247,7 +252,7 @@ img{display:block;max-width:100%}
   filter:blur(26px);opacity:.2;pointer-events:none;
 }
 .stat-emoji{font-size:20px;margin-bottom:12px;line-height:1}
-.stat-num{font-family:'Fraunces',serif;font-size:32px;font-weight:700;line-height:1;margin-bottom:2px}
+.stat-num{font-family:'Public Sans',sans-serif;font-size:32px;font-weight:700;line-height:1;margin-bottom:2px}
 .stat-lbl{font-size:12px;color:var(--text2);font-weight:500}
 .stat-chg{font-size:11px;margin-top:7px;display:flex;align-items:center;gap:3px;font-weight:600}
 .chg-up{color:var(--green)}.chg-down{color:var(--red)}
@@ -323,7 +328,7 @@ img{display:block;max-width:100%}
   display:flex;align-items:center;gap:8px;
 }
 .k-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.k-title{font-family:'Fraunces',serif;font-size:12px;font-weight:600;flex:1;color:var(--text)}
+.k-title{font-family:'Public Sans',sans-serif;font-size:12px;font-weight:600;flex:1;color:var(--text)}
 .k-count{
   font-size:10px;font-weight:700;
   background:var(--bg4);color:var(--text2);
@@ -383,7 +388,7 @@ img{display:block;max-width:100%}
 .ai-card.c-amber::before{background:var(--amber)}
 .ai-card.c-blue::before{background:var(--blue)}
 .ai-emoji{font-size:28px;margin-bottom:12px;line-height:1}
-.ai-title{font-family:'Fraunces',serif;font-size:15px;font-weight:600;margin-bottom:6px;color:var(--text)}
+.ai-title{font-family:'Public Sans',sans-serif;font-size:15px;font-weight:600;margin-bottom:6px;color:var(--text)}
 .ai-desc{font-size:12px;color:var(--text2);line-height:1.6}
 .ai-link{display:inline-flex;align-items:center;gap:4px;margin-top:12px;font-size:12px;font-weight:700;color:var(--accent)}
 .ai-result{
@@ -393,7 +398,7 @@ img{display:block;max-width:100%}
 }
 .ai-result.open{display:block;animation:pageIn .25s ease}
 .ai-result-hd{display:flex;align-items:center;gap:8px;margin-bottom:12px}
-.ai-result-title{font-family:'Fraunces',serif;font-size:14px;font-weight:600;color:var(--text)}
+.ai-result-title{font-family:'Public Sans',sans-serif;font-size:14px;font-weight:600;color:var(--text)}
 .typing-cur{
   display:inline-block;width:3px;height:14px;
   background:var(--accent);border-radius:2px;
@@ -417,10 +422,10 @@ img{display:block;max-width:100%}
   display:flex;align-items:center;justify-content:center;
   font-size:26px;font-weight:700;color:#fff;
 }
-.profile-name-lg{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--text)}
+.profile-name-lg{font-family:'Public Sans',sans-serif;font-size:22px;font-weight:700;color:var(--text)}
 .profile-email{font-size:13px;color:var(--text2);margin-top:3px}
 .profile-kpis{display:flex;gap:26px;margin-top:12px;flex-wrap:wrap}
-.kpi-val{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--text)}
+.kpi-val{font-family:'Public Sans',sans-serif;font-size:22px;font-weight:700;color:var(--text)}
 .kpi-lbl{font-size:10px;color:var(--text3);margin-top:2px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
 .profile-grid{display:grid;grid-template-columns:3fr 2fr;gap:18px}
 .timeline{display:flex;flex-direction:column;gap:0}
@@ -454,10 +459,10 @@ img{display:block;max-width:100%}
 .toggle.on::after{left:calc(100% - 17px)}
 .toggle.off::after{left:3px}
 .sub-badge{
-  background:linear-gradient(135deg,rgba(30,58,95,.06),rgba(232,168,56,.05));
-  border:1px solid rgba(30,58,95,.12);border-radius:10px;padding:14px;margin-top:14px;
+  background:var(--manila);
+  border:1px solid var(--manila2);border-radius:10px;padding:14px;margin-top:14px;
 }
-.sub-plan{font-family:'Fraunces',serif;font-size:14px;font-weight:700;color:var(--accent)}
+.sub-plan{font-family:'Public Sans',sans-serif;font-size:14px;font-weight:700;color:var(--accent)}
 .sub-meta{font-size:11px;color:var(--text2);margin-top:2px}
 .sub-desc{font-size:12px;color:var(--text2);margin-top:8px;line-height:1.5}
 
@@ -472,9 +477,7 @@ img{display:block;max-width:100%}
 }
 .hero-glow{
   position:absolute;inset:0;pointer-events:none;
-  background:
-    radial-gradient(ellipse 70% 50% at 50% -5%,rgba(30,58,95,.07) 0%,transparent 65%),
-    radial-gradient(ellipse 40% 30% at 80% 80%,rgba(232,168,56,.05) 0%,transparent 60%);
+  display:none;
 }
 .hero-pill{
   display:inline-flex;align-items:center;gap:7px;
@@ -483,14 +486,11 @@ img{display:block;max-width:100%}
   font-size:12px;font-weight:600;color:var(--accent);margin-bottom:24px;
 }
 .hero-h1{
-  font-family:'Fraunces',serif;font-size:58px;font-weight:800;
+  font-family:'Public Sans',sans-serif;font-size:58px;font-weight:800;
   line-height:1.05;margin-bottom:20px;
   max-width:700px;margin-left:auto;margin-right:auto;
 }
-.hero-h1 span{
-  background:linear-gradient(125deg,var(--accent),var(--amber));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-}
+.hero-h1 span{color:inherit}
 .hero-sub{
   font-size:17px;color:var(--text2);
   max-width:490px;margin:0 auto 38px;line-height:1.65;
@@ -503,12 +503,12 @@ img{display:block;max-width:100%}
   display:flex;align-items:center;justify-content:center;
   gap:44px;flex-wrap:wrap;
 }
-.hsp-num{font-family:'Fraunces',serif;font-size:32px;font-weight:700;color:var(--text)}
+.hsp-num{font-family:'Public Sans',sans-serif;font-size:32px;font-weight:700;color:var(--text)}
 .hsp-lbl{font-size:12px;color:var(--text2);margin-top:3px;font-weight:500}
 
 .section{padding:64px 44px}
 .sec-hd{text-align:center;margin-bottom:48px}
-.sec-title{font-family:'Fraunces',serif;font-size:36px;font-weight:700;margin-bottom:10px;color:var(--text)}
+.sec-title{font-family:'Public Sans',sans-serif;font-size:36px;font-weight:700;margin-bottom:10px;color:var(--text)}
 .sec-sub{font-size:15px;color:var(--text2);line-height:1.6}
 
 /* features */
@@ -520,7 +520,7 @@ img{display:block;max-width:100%}
 }
 .feat-card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:var(--shadow)}
 .feat-icon{font-size:28px;margin-bottom:14px;line-height:1}
-.feat-title{font-family:'Fraunces',serif;font-size:16px;font-weight:600;margin-bottom:8px;color:var(--text)}
+.feat-title{font-family:'Public Sans',sans-serif;font-size:16px;font-weight:600;margin-bottom:8px;color:var(--text)}
 .feat-desc{font-size:13px;color:var(--text2);line-height:1.65}
 
 /* testimonials */
@@ -530,7 +530,7 @@ img{display:block;max-width:100%}
   border-radius:var(--r2);padding:24px;
 }
 .testi-stars{color:var(--amber);font-size:13px;margin-bottom:12px;letter-spacing:2px}
-.testi-quote{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:16px;font-style:italic}
+.testi-quote{font-size:15px;color:var(--text);line-height:1.6;margin-bottom:16px}
 .testi-author{display:flex;align-items:center;gap:10px}
 .testi-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
 .testi-name{font-size:13px;font-weight:600;color:var(--text)}
@@ -552,7 +552,7 @@ img{display:block;max-width:100%}
   padding:3px 13px;border-radius:20px;white-space:nowrap;letter-spacing:.6px;text-transform:uppercase;
 }
 .plan-tier{font-size:11px;font-weight:700;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
-.plan-price-lg{font-family:'Fraunces',serif;font-size:40px;font-weight:800;line-height:1;margin-bottom:3px;color:var(--text)}
+.plan-price-lg{font-family:'Public Sans',sans-serif;font-size:40px;font-weight:800;line-height:1;margin-bottom:3px;color:var(--text)}
 .plan-price-lg sup{font-size:18px;vertical-align:top;margin-top:8px;font-weight:600}
 .plan-price-lg span{font-size:15px;font-weight:500;color:var(--text2)}
 .plan-tagline{font-size:12px;color:var(--text2);margin-bottom:22px}
@@ -563,7 +563,7 @@ img{display:block;max-width:100%}
   display:flex;align-items:center;gap:8px;
 }
 .plan-feats li:last-child{border:none}
-.plan-feats li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;font-size:12px}
+.plan-feats li::before{content:'';width:12px;height:7px;border-left:2px solid var(--green);border-bottom:2px solid var(--green);transform:rotate(-45deg) translateY(-2px);color:var(--green);font-weight:700;flex-shrink:0;font-size:12px}
 
 /* faq */
 .faq-grid{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
@@ -595,7 +595,7 @@ img{display:block;max-width:100%}
   font-size:14px;cursor:pointer;transition:all .13s;color:rgba(255,255,255,0.6);
 }
 .social-btn:hover{background:rgba(255,255,255,0.14);color:#fff}
-.footer-col-title{font-family:'Fraunces',serif;font-size:12px;font-weight:700;color:rgba(255,255,255,0.28);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
+.footer-col-title{font-family:'Public Sans',sans-serif;font-size:12px;font-weight:700;color:rgba(255,255,255,0.28);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
 .footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
 .footer-links a{font-size:13px;color:rgba(255,255,255,0.45);transition:color .12s;cursor:pointer}
 .footer-links a:hover{color:rgba(255,255,255,0.88)}
@@ -628,7 +628,7 @@ img{display:block;max-width:100%}
   display:flex;align-items:center;justify-content:space-between;
   position:sticky;top:0;background:var(--bg2);z-index:1;
 }
-.modal-title{font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--text)}
+.modal-title{font-family:'Public Sans',sans-serif;font-size:16px;font-weight:700;color:var(--text)}
 .modal-close{
   width:28px;height:28px;border-radius:7px;border:none;
   background:var(--bg3);color:var(--text2);font-size:14px;
@@ -671,7 +671,7 @@ textarea.form-input{resize:vertical;min-height:78px;line-height:1.5}
 ═══════════════════════════════════════════════ */
 .empty{text-align:center;padding:56px 20px;color:var(--text3)}
 .empty-ico{font-size:44px;margin-bottom:14px}
-.empty-title{font-family:'Fraunces',serif;font-size:16px;font-weight:600;color:var(--text2);margin-bottom:6px}
+.empty-title{font-family:'Public Sans',sans-serif;font-size:16px;font-weight:600;color:var(--text2);margin-bottom:6px}
 .empty-desc{font-size:13px;line-height:1.5;color:var(--text3)}
 
 /* ═══════════════════════════════════════════════
@@ -700,6 +700,112 @@ textarea.form-input{resize:vertical;min-height:78px;line-height:1.5}
   display:none;
 }
 .sidebar-backdrop.show{display:block}
+
+/* ═══════════════════════════════════════════════
+   FILING CABINET LAYER
+═══════════════════════════════════════════════ */
+::selection{background:var(--manila);color:var(--manila-ink)}
+:focus-visible{outline:2px solid var(--accent2);outline-offset:2px}
+body{font-size:15px}
+h1,h2,h3,.page-title,.sec-title,.hero-h1{letter-spacing:-.025em}
+.svg-ic{display:block;flex-shrink:0}
+.nav-icon{display:inline-flex;align-items:center;justify-content:center;width:20px}
+.nav-item{font-size:14px;padding:9px 10px;border-radius:var(--r)}
+.nav-item.active{background:rgba(237,220,169,.14);color:#fff}
+.nav-item.active::before{background:var(--manila);width:4px;height:70%}
+.nav-section-label{font-size:12px;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.5);font-weight:600}
+.logo-mark{background:var(--manila);color:var(--manila-ink);border-radius:var(--r)}
+.logo-sub{font-size:11px;letter-spacing:0;text-transform:none;color:var(--manila)}
+.user-plan{color:var(--manila)}
+.avatar{background:var(--manila);color:var(--manila-ink)}
+.topbar{background:var(--bg);backdrop-filter:none}
+.btn{border-radius:var(--r);font-weight:700;display:inline-flex;align-items:center;gap:6px}
+.btn-lg{min-height:52px;padding:0 26px;font-size:16px;border-radius:var(--r)}
+.card,.stat-card,.feat-card,.testi-card,.price-card,.ai-card,.faq-item,.k-col,.modal,.profile-hero,.ai-result{border-radius:var(--r2)}
+.stat-glow,.ai-card::before{display:none}
+.stat-emoji,.ai-emoji{color:var(--accent);margin-bottom:12px}
+.stat-num{font-weight:800;letter-spacing:-.03em}
+.status{border-radius:3px;font-weight:700}
+.s-applied{background:#E4ECF8;color:#1C4F96}.s-applied::before{background:#1E5FB8}
+.s-reviewing{background:#FBF0D3;color:#7A5306}.s-reviewing::before{background:#C98A12}
+.s-interview{background:#E1F2E9;color:#13603E}.s-interview::before{background:#1A7F52}
+.s-rejected{background:#F8E3E1;color:#9C2A23}.s-rejected::before{background:#C8372F}
+.s-offer{background:var(--manila);color:var(--manila-ink)}.s-offer::before{background:#8A6A12}
+.s-hired{background:#DDEEF2;color:#0B5B71}.s-hired::before{background:#0E7490}
+.form-label{font-size:13px;letter-spacing:0;text-transform:none;color:var(--text)}
+.form-input{min-height:44px;font-size:15px;border-radius:var(--r);caret-color:var(--accent2)}
+.kpi-lbl,.plan-tier{font-size:13px;letter-spacing:0;text-transform:none}
+.feat-badge{font-size:12px;letter-spacing:0;text-transform:none;background:var(--manila);color:var(--manila-ink);border-radius:3px}
+.footer-col-title{font-size:13px;letter-spacing:0;text-transform:none;color:var(--manila)}
+.toast{border-radius:var(--r2)}
+.toast-icon{color:var(--manila);display:inline-flex}
+.empty-ico{color:var(--text3);display:flex;justify-content:center}
+.faq-arrow{display:inline-flex}
+.hide-sm{display:inline}
+/* Kanban columns read as file folders, each with its own coloured tab */
+.k-col{background:var(--bg3);border:none;border-top:4px solid var(--border2);border-radius:0 0 var(--r2) var(--r2)}
+.k-card{border-radius:var(--r)}
+.k-card:hover{transform:none}
+
+/* Landing */
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(40px,6vw,88px);align-items:center;text-align:left;padding:clamp(56px,8vw,112px) clamp(22px,4vw,56px) clamp(56px,7vw,96px);max-width:1280px;margin:0 auto}
+.hero-pill{background:none;border:none;padding:0;color:var(--accent2);font-size:14px;font-weight:700;border-radius:0}
+.hero-h1{font-size:clamp(40px,5.6vw,76px);font-weight:900;line-height:.98;margin:0 0 24px;max-width:13ch}
+.hero-sub{margin:0 0 32px;max-width:44ch;font-size:clamp(16px,1.3vw,18px)}
+.hero-btns{justify-content:flex-start}
+.hero-social-proof{justify-content:flex-start;gap:clamp(20px,3vw,40px);margin-top:44px;padding-top:22px;border-top:2px solid var(--text)}
+.hsp-num{font-size:30px;font-weight:800;letter-spacing:-.02em}
+.hsp-lbl{font-size:13px}
+.folder-stack{position:relative;display:flex;flex-direction:column;gap:0;padding-top:18px}
+.folder{position:relative;margin-top:-6px;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.folder:first-child{margin-top:0}
+.folder:hover{transform:translateY(-10px)}
+.folder-tab{display:inline-block;padding:7px 16px 6px;border-radius:6px 6px 0 0;font-size:13px;font-weight:800;margin-left:var(--tab-x,24px)}
+.folder-body{background:var(--manila);color:var(--manila-ink);border-radius:0 6px 6px 6px;padding:20px 22px 22px;box-shadow:0 -1px 0 rgba(74,58,18,.12),0 18px 30px -22px rgba(22,38,58,.5)}
+.f-applied{--tab-x:24px}.f-applied .folder-tab{background:#DDE6F3;color:#1C4F96}.f-applied .folder-body{background:#F3F5F8;color:var(--text)}
+.f-interview{--tab-x:150px}.f-interview .folder-tab{background:#D9EEE2;color:#13603E}.f-interview .folder-body{background:#EDF5EF;color:var(--text)}
+.f-offer{--tab-x:276px}.f-offer .folder-tab{background:var(--manila2);color:var(--manila-ink)}
+.fo-co{font-size:26px;font-weight:900;letter-spacing:-.02em;line-height:1.1}
+.fo-role{font-size:15px;opacity:.82;margin-top:2px}
+.fo-note{margin-top:12px;font-size:15px;font-weight:700;background:rgba(255,255,255,.5);display:inline-block;padding:6px 10px;border-radius:3px}
+.fo-meta{display:flex;justify-content:space-between;gap:12px;margin-top:18px;padding-top:12px;border-top:1px dashed currentColor;font-size:13px;opacity:.8}
+.section{max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(22px,4vw,56px)}
+.section[style*="background:var(--bg2)"]{max-width:none}
+.section[style*="background:var(--bg2)"] > *{max-width:1168px;margin-left:auto;margin-right:auto}
+.sec-hd{text-align:left;padding-bottom:20px;border-bottom:2px solid var(--text);display:flex;justify-content:space-between;align-items:flex-end;gap:16px 40px;flex-wrap:wrap}
+.sec-title{font-size:clamp(28px,3.4vw,44px);font-weight:900;margin:0}
+.sec-sub{max-width:40ch}
+.feat-grid{gap:0}
+.feat-card{background:none;border:none;border-bottom:1px solid var(--border2);border-radius:0;padding:26px 26px 28px 0}
+.feat-card:nth-child(3n+2),.feat-card:nth-child(3n){padding-left:26px;border-left:1px solid var(--border2)}
+.feat-card:hover{transform:none;box-shadow:none}
+.feat-icon{width:44px;height:44px;border-radius:var(--r);background:var(--manila);color:var(--manila-ink);display:flex;align-items:center;justify-content:center}
+.feat-title{font-size:18px;font-weight:800}
+.feat-desc{font-size:15px;line-height:1.55}
+.testi-stars{color:var(--amber)}
+.price-card.featured{border:2px solid var(--accent);box-shadow:none}
+.price-card:hover{transform:none}
+.plan-price-lg{font-weight:900}
+@media (prefers-reduced-motion:no-preference){
+  .folder{animation:fileIn .7s cubic-bezier(.16,1,.3,1) both}
+  .folder:nth-child(2){animation-delay:.08s}.folder:nth-child(3){animation-delay:.16s}
+}
+@keyframes fileIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@media(max-width:1000px){
+  .hero{grid-template-columns:minmax(0,1fr)}
+  .folder-stack{max-width:520px}
+}
+@media(max-width:900px){
+  .feat-card,.feat-card:nth-child(3n+2),.feat-card:nth-child(3n){padding:22px 0;border-left:none}
+}
+@media(max-width:700px){
+  .topbar-actions .icon-btn[title="Export"]{display:none}
+  .topbar-actions{gap:6px}
+  .hero-h1{font-size:40px}
+  .f-interview{--tab-x:110px}.f-offer{--tab-x:200px}
+  .hide-sm{display:none}
+  .topbar{padding:0 14px}
+}
 </style>
 </head>
 <body>
@@ -751,39 +857,39 @@ textarea.form-input{resize:vertical;min-height:78px;line-height:1.5}
   <nav class="sidebar-nav">
     <div class="nav-section-label">Main</div>
     <div class="nav-item active" data-page="landing" onclick="navigate('landing',this)">
-      <span class="nav-icon">🏠</span> Home
+      <span class="nav-icon"><i class="ic" data-ic="home" data-sz="18"></i></span> Home
     </div>
     <div class="nav-item" data-page="dashboard" onclick="navigate('dashboard',this)">
-      <span class="nav-icon">📊</span> Dashboard
+      <span class="nav-icon"><i class="ic" data-ic="chart" data-sz="18"></i></span> Dashboard
     </div>
     <div class="nav-item" data-page="applications" onclick="navigate('applications',this)">
-      <span class="nav-icon">📋</span> Applications
+      <span class="nav-icon"><i class="ic" data-ic="doc" data-sz="18"></i></span> Applications
       <span class="nav-badge" id="nav-count">12</span>
     </div>
     <div class="nav-item" data-page="kanban" onclick="navigate('kanban',this)">
-      <span class="nav-icon">🗂️</span> Kanban Board
+      <span class="nav-icon"><i class="ic" data-ic="kanban" data-sz="18"></i></span> Kanban Board
     </div>
 
     <div class="nav-section-label">AI Tools</div>
     <div class="nav-item" data-page="ai-tools" onclick="navigate('ai-tools',this)">
-      <span class="nav-icon">🤖</span> AI Assistant
+      <span class="nav-icon"><i class="ic" data-ic="robot" data-sz="18"></i></span> AI Assistant
     </div>
     <div class="nav-item" data-page="ai-tools" onclick="navigate('ai-tools',this)">
-      <span class="nav-icon">📄</span> Resume Analyzer
+      <span class="nav-icon"><i class="ic" data-ic="doc" data-sz="18"></i></span> Resume Analyzer
     </div>
     <div class="nav-item" data-page="ai-tools" onclick="navigate('ai-tools',this)">
-      <span class="nav-icon">✍️</span> Cover Letter AI
+      <span class="nav-icon"><i class="ic" data-ic="pen" data-sz="18"></i></span> Cover Letter AI
     </div>
 
     <div class="nav-section-label">Workspace</div>
     <div class="nav-item" data-page="profile" onclick="navigate('profile',this)">
-      <span class="nav-icon">👤</span> Profile
+      <span class="nav-icon"><i class="ic" data-ic="profile" data-sz="18"></i></span> Profile
     </div>
     <div class="nav-item" onclick="navigate('landing',this)">
-      <span class="nav-icon">💎</span> Upgrade Plan
+      <span class="nav-icon"><i class="ic" data-ic="gem" data-sz="18"></i></span> Upgrade Plan
     </div>
     <div class="nav-item" onclick="toast('⚙️ Settings coming soon!')">
-      <span class="nav-icon">⚙️</span> Settings
+      <span class="nav-icon"><i class="ic" data-ic="settings" data-sz="18"></i></span> Settings
     </div>
   </nav>
 
@@ -792,9 +898,9 @@ textarea.form-input{resize:vertical;min-height:78px;line-height:1.5}
       <div class="avatar" id="sidebar-avatar">AH</div>
       <div style="flex:1;min-width:0">
         <div class="user-name" id="sidebar-username">Ahmed Hassan</div>
-        <div class="user-plan" id="sidebar-plan">✦ Pro Plan</div>
+        <div class="user-plan" id="sidebar-plan">Pro Plan</div>
       </div>
-      <div class="user-caret">›</div>
+      <div class="user-caret"><i class="ic" data-ic="arrow" data-sz="14"></i></div>
     </div>
   </div>
 </aside>
@@ -803,16 +909,16 @@ textarea.form-input{resize:vertical;min-height:78px;line-height:1.5}
 <main class="main">
   <!-- TOP BAR -->
   <header class="topbar">
-    <button class="menu-btn" onclick="openSidebar()">☰</button>
+    <button class="menu-btn" onclick="openSidebar()" aria-label="Menu"><i class="ic" data-ic="menu" data-sz="20"></i></button>
     <div class="topbar-title" id="topbar-title">Home</div>
     <div class="search-wrap">
-      <span class="search-icon">🔍</span>
+      <span class="search-icon"><i class="ic" data-ic="search" data-sz="16"></i></span>
       <input type="text" placeholder="Search applications..." aria-label="Search"/>
     </div>
     <div class="topbar-actions">
-      <button class="icon-btn" title="Notifications" onclick="toast('🔔 You have 3 new updates!')">🔔</button>
-      <button class="icon-btn" title="Export" onclick="toast('📤 Export started — check your downloads!')">📤</button>
-      <button class="btn btn-primary" onclick="openModal()">+ Add Application</button>
+      <button class="icon-btn" title="Notifications" aria-label="Notifications" onclick="toast('🔔 You have 3 new updates!')"><i class="ic" data-ic="bell" data-sz="18"></i></button>
+      <button class="icon-btn" title="Export" aria-label="Export" onclick="toast('📤 Export started. Check your downloads.')"><i class="ic" data-ic="export" data-sz="18"></i></button>
+      <button class="btn btn-primary" onclick="openModal()"><i class="ic" data-ic="plus" data-sz="16"></i><span class="hide-sm">Add application</span></button>
     </div>
   </header>
 
@@ -824,66 +930,72 @@ textarea.form-input{resize:vertical;min-height:78px;line-height:1.5}
       <div class="landing">
         <!-- HERO -->
         <div class="hero">
-          <div class="hero-glow"></div>
-          <div class="hero-pill">✨ AI-Powered Career Platform</div>
-          <h1 class="hero-h1">Land Your Dream Job with <span>AI-Powered</span> Tracking</h1>
-          <p class="hero-sub">Organize every application, ace every interview, and get hired faster — all in one beautiful AI workspace.</p>
-          <div class="hero-btns">
-            <button class="btn btn-primary btn-lg" onclick="navigate('dashboard',null)">🚀 Start Free Trial</button>
-            <button class="btn btn-ghost btn-lg" onclick="navigate('dashboard',null)">View Dashboard →</button>
+          <div class="hero-copy">
+            <div class="hero-pill">AI-powered career platform</div>
+            <h1 class="hero-h1">Every application, filed and followed up</h1>
+            <p class="hero-sub">JobTrackr keeps each role you apply for in one place, from first application to offer, with AI help for the resume, the cover letter and the interview.</p>
+            <div class="hero-btns">
+              <button class="btn btn-primary btn-lg" onclick="navigate('dashboard',null)">Start free trial</button>
+              <button class="btn btn-ghost btn-lg" onclick="navigate('dashboard',null)">View dashboard</button>
+            </div>
+            <div class="hero-social-proof">
+              <div><div class="hsp-num">50K+</div><div class="hsp-lbl">Job seekers</div></div>
+              <div><div class="hsp-num">2.4×</div><div class="hsp-lbl">Faster hired</div></div>
+              <div><div class="hsp-num">98%</div><div class="hsp-lbl">Satisfaction</div></div>
+              <div><div class="hsp-num">200+</div><div class="hsp-lbl">Companies tracked</div></div>
+            </div>
           </div>
-          <div class="hero-social-proof">
-            <div><div class="hsp-num">50K+</div><div class="hsp-lbl">Job Seekers</div></div>
-            <div><div class="hsp-num">2.4×</div><div class="hsp-lbl">Faster Hired</div></div>
-            <div><div class="hsp-num">98%</div><div class="hsp-lbl">Satisfaction</div></div>
-            <div><div class="hsp-num">200+</div><div class="hsp-lbl">Companies Tracked</div></div>
+          <div class="folder-stack" aria-label="Example applications" data-ui>
+            <div class="folder f-applied"><div class="folder-tab">Applied</div><div class="folder-body"><div class="fo-co">Stripe</div><div class="fo-role">Product Designer</div><div class="fo-meta"><span>San Francisco · Hybrid</span><span>May 2</span></div></div></div>
+            <div class="folder f-interview"><div class="folder-tab">Interview</div><div class="folder-body"><div class="fo-co">Figma</div><div class="fo-role">Staff Designer</div><div class="fo-meta"><span>Portfolio review, 2 rounds left</span><span>Apr 22</span></div></div></div>
+            <div class="folder f-offer"><div class="folder-tab">Offer</div><div class="folder-body"><div class="fo-co">Linear</div><div class="fo-role">Senior Designer</div><div class="fo-note">$140K base + equity. Reply by May 15.</div><div class="fo-meta"><span>Remote</span><span>Apr 1</span></div></div></div>
           </div>
         </div>
 
         <!-- FEATURES -->
         <div class="section" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
           <div class="sec-hd">
-            <div class="sec-title">Everything You Need to Get Hired</div>
-            <div class="sec-sub">From AI resume analysis to interview prep — all in one beautiful workspace.</div>
+            <div class="sec-title">Everything you need to get hired</div>
+            <div class="sec-sub">From resume analysis to interview prep, in one workspace.</div>
           </div>
           <div class="feat-grid">
-            <div class="feat-card"><div class="feat-icon">🗂️</div><div class="feat-title">Kanban Board</div><div class="feat-desc">Drag and drop applications through every stage with visual clarity and smooth animations.</div></div>
-            <div class="feat-card"><div class="feat-icon">🤖</div><div class="feat-title">AI Resume Analyzer</div><div class="feat-desc">Instant feedback with ATS scoring, keyword gap analysis, and personalized improvement tips.</div></div>
-            <div class="feat-card"><div class="feat-icon">✍️</div><div class="feat-title">Cover Letter Generator</div><div class="feat-desc">Generate tailored, compelling cover letters for any job in seconds using advanced Claude AI.</div></div>
-            <div class="feat-card"><div class="feat-icon">📊</div><div class="feat-title">Analytics Dashboard</div><div class="feat-desc">Track your success rate, application trends, and interview conversion with beautiful charts.</div></div>
-            <div class="feat-card"><div class="feat-icon">🎯</div><div class="feat-title">Interview Prep AI</div><div class="feat-desc">Practice with AI-generated questions tailored to your target role, company, and industry.</div></div>
-            <div class="feat-card"><div class="feat-icon">📅</div><div class="feat-title">Smart Reminders</div><div class="feat-desc">Never miss a follow-up or interview with intelligent deadline tracking and email notifications.</div></div>
+            <div class="feat-card"><div class="feat-icon"><i class="ic" data-ic="kanban" data-sz="22"></i></div><div class="feat-title">Kanban Board</div><div class="feat-desc">Drag each application from stage to stage and see the whole search at a glance.</div></div>
+            <div class="feat-card"><div class="feat-icon"><i class="ic" data-ic="robot" data-sz="22"></i></div><div class="feat-title">AI Resume Analyzer</div><div class="feat-desc">ATS scoring, missing keywords and specific fixes for the role you are applying to.</div></div>
+            <div class="feat-card"><div class="feat-icon"><i class="ic" data-ic="pen" data-sz="22"></i></div><div class="feat-title">Cover Letter Generator</div><div class="feat-desc">A first draft of a cover letter tailored to the job, written with Claude.</div></div>
+            <div class="feat-card"><div class="feat-icon"><i class="ic" data-ic="chart" data-sz="22"></i></div><div class="feat-title">Analytics Dashboard</div><div class="feat-desc">Response rate, application trends and interview conversion, charted from your own data.</div></div>
+            <div class="feat-card"><div class="feat-icon"><i class="ic" data-ic="target" data-sz="22"></i></div><div class="feat-title">Interview Prep AI</div><div class="feat-desc">Practice questions written for the role, the company and the industry you are targeting.</div></div>
+            <div class="feat-card"><div class="feat-icon"><i class="ic" data-ic="calendar" data-sz="22"></i></div><div class="feat-title">Smart Reminders</div><div class="feat-desc">Deadlines, follow-ups and interviews, with email reminders before each one.</div></div>
           </div>
         </div>
 
         <!-- TESTIMONIALS -->
         <div class="section">
           <div class="sec-hd">
-            <div class="sec-title">Loved by Job Seekers Worldwide</div>
-            <div class="sec-sub">Real stories from people who landed their dream jobs.</div>
+            <div class="sec-title">From people who found the job</div>
+            <div class="sec-sub">What a few of them told us.</div>
           </div>
           <div class="testi-grid">
             <div class="testi-card">
-              <div class="testi-stars">★★★★★</div>
+              <div class="testi-stars" role="img" aria-label="5 out of 5">★★★★★</div>
               <div class="testi-quote">"JobTrackr completely transformed my job search. The AI cover letter generator alone saved me hours each week. I landed 3 offers in 6 weeks!"</div>
               <div class="testi-author">
-                <div class="testi-av" style="background:linear-gradient(135deg,var(--accent),var(--cyan))">SR</div>
+                <div class="testi-av" style="background:var(--accent)">SR</div>
                 <div><div class="testi-name">Sarah Rodriguez</div><div class="testi-role">Senior Product Designer · Hired at Figma</div></div>
               </div>
             </div>
             <div class="testi-card">
-              <div class="testi-stars">★★★★★</div>
+              <div class="testi-stars" role="img" aria-label="5 out of 5">★★★★★</div>
               <div class="testi-quote">"The Kanban board is a game-changer. I can see exactly where every application stands. My organization went from chaotic to crystal clear."</div>
               <div class="testi-author">
-                <div class="testi-av" style="background:linear-gradient(135deg,var(--green),var(--cyan))">MK</div>
+                <div class="testi-av" style="background:var(--green)">MK</div>
                 <div><div class="testi-name">Marcus Kim</div><div class="testi-role">Software Engineer · Hired at Stripe</div></div>
               </div>
             </div>
             <div class="testi-card">
-              <div class="testi-stars">★★★★★</div>
+              <div class="testi-stars" role="img" aria-label="5 out of 5">★★★★★</div>
               <div class="testi-quote">"The resume ATS analyzer is incredibly accurate. I went from 5% callback rate to 38% just by following the AI suggestions. Worth every penny."</div>
               <div class="testi-author">
-                <div class="testi-av" style="background:linear-gradient(135deg,var(--pink),var(--amber))">JP</div>
+                <div class="testi-av" style="background:var(--red)">JP</div>
                 <div><div class="testi-name">Jasmine Patel</div><div class="testi-role">Data Scientist · Hired at Netflix</div></div>
               </div>
             </div>
@@ -893,8 +1005,8 @@ textarea.form-input{resize:vertical;min-height:78px;line-height:1.5}
         <!-- PRICING -->
         <div class="section" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
           <div class="sec-hd">
-            <div class="sec-title">Simple, Transparent Pricing</div>
-            <div class="sec-sub">Start free. Upgrade when you're ready to get serious.</div>
+            <div class="sec-title">Pricing</div>
+            <div class="sec-sub">Start free and upgrade when the search picks up.</div>
           </div>
           <div class="pricing-grid">
             <div class="price-card">
@@ -911,7 +1023,7 @@ textarea.form-input{resize:vertical;min-height:78px;line-height:1.5}
               <button class="btn btn-ghost" style="width:100%" onclick="toast('🚀 Creating your free account!')">Get Started Free</button>
             </div>
             <div class="price-card featured">
-              <div class="feat-badge">✦ MOST POPULAR</div>
+              <div class="feat-badge">Most popular</div>
               <div class="plan-tier">Pro</div>
               <div class="plan-price-lg"><sup>$</sup>12<span>/mo</span></div>
               <div class="plan-tagline">For serious job seekers</div>
@@ -946,37 +1058,37 @@ textarea.form-input{resize:vertical;min-height:78px;line-height:1.5}
         <!-- FAQ -->
         <div class="section">
           <div class="sec-hd">
-            <div class="sec-title">Frequently Asked Questions</div>
+            <div class="sec-title">Questions</div>
             <div class="sec-sub">Everything you need to know about JobTrackr.</div>
           </div>
           <div class="faq-grid">
             <div class="faq-item">
               <div class="faq-q" onclick="toggleFaq(this)">
-                Is there a free plan? <span class="faq-arrow">▾</span>
+                Is there a free plan? <span class="faq-arrow"><i class="ic" data-ic="chevron" data-sz="16"></i></span>
               </div>
-              <div class="faq-a">Yes! Our free plan lets you track up to 20 job applications with full Kanban board access, basic analytics, and email reminders — no credit card required.</div>
+              <div class="faq-a">Yes. The free plan tracks up to 20 applications with the full Kanban board, basic analytics and email reminders. No credit card needed.</div>
             </div>
             <div class="faq-item">
               <div class="faq-q" onclick="toggleFaq(this)">
-                How does the AI resume analyzer work? <span class="faq-arrow">▾</span>
+                How does the AI resume analyzer work? <span class="faq-arrow"><i class="ic" data-ic="chevron" data-sz="16"></i></span>
               </div>
               <div class="faq-a">Upload your resume and paste a job description. Our AI (powered by Claude) scores your resume against ATS systems, identifies missing keywords, and gives you specific, actionable improvements tailored to the role.</div>
             </div>
             <div class="faq-item">
               <div class="faq-q" onclick="toggleFaq(this)">
-                Can I cancel my subscription anytime? <span class="faq-arrow">▾</span>
+                Can I cancel my subscription anytime? <span class="faq-arrow"><i class="ic" data-ic="chevron" data-sz="16"></i></span>
               </div>
-              <div class="faq-a">Absolutely. Cancel anytime from your profile settings — no questions asked. You'll keep Pro access until the end of your billing period.</div>
+              <div class="faq-a">Yes. Cancel from your profile settings whenever you like, and you keep Pro access until the end of the billing period.</div>
             </div>
             <div class="faq-item">
               <div class="faq-q" onclick="toggleFaq(this)">
-                Is my data secure? <span class="faq-arrow">▾</span>
+                Is my data secure? <span class="faq-arrow"><i class="ic" data-ic="chevron" data-sz="16"></i></span>
               </div>
               <div class="faq-a">Yes. All data is encrypted at rest and in transit. We use JWT authentication, secure API validation, rate limiting, and never sell your personal data to third parties.</div>
             </div>
             <div class="faq-item">
               <div class="faq-q" onclick="toggleFaq(this)">
-                Does it support multiple languages? <span class="faq-arrow">▾</span>
+                Does it support multiple languages? <span class="faq-arrow"><i class="ic" data-ic="chevron" data-sz="16"></i></span>
               </div>
               <div class="faq-a">JobTrackr currently supports English and Arabic, with more languages coming soon. You can switch languages from your profile settings.</div>
             </div>
@@ -990,11 +1102,11 @@ textarea.form-input{resize:vertical;min-height:78px;line-height:1.5}
               <div class="logo-mark">JT</div>
               <div class="logo-text">JobTrackr</div>
             </div>
-            <div class="footer-desc">The AI-powered job application tracker that helps you land your dream role faster.</div>
+            <div class="footer-desc">The job application tracker with AI help for every step of the search.</div>
             <div class="footer-social">
-              <div class="social-btn" onclick="toast('🐦 Twitter/X — @JobTrackrApp')">𝕏</div>
-              <div class="social-btn" onclick="toast('💼 LinkedIn — /company/jobtrackr')">in</div>
-              <div class="social-btn" onclick="toast('🐙 GitHub — github.com/jobtrackr')">⌥</div>
+              <div class="social-btn" aria-label="X" onclick="toast('🐦 X: @JobTrackrApp')"><i class="ic" data-ic="x" data-sz="15"></i></div>
+              <div class="social-btn" aria-label="LinkedIn" onclick="toast('💼 LinkedIn: /company/jobtrackr')"><i class="ic" data-ic="linkedin" data-sz="15"></i></div>
+              <div class="social-btn" aria-label="GitHub" onclick="toast('🐙 GitHub: github.com/jobtrackr')"><i class="ic" data-ic="github" data-sz="15"></i></div>
             </div>
           </div>
           <div>
@@ -1027,7 +1139,7 @@ textarea.form-input{resize:vertical;min-height:78px;line-height:1.5}
         </footer>
         <div class="footer-bottom">
           <div>© 2025 JobTrackr Inc. All rights reserved.</div>
-          <div>Made with ❤️ for job seekers everywhere</div>
+          <div>Made for job seekers everywhere</div>
         </div>
       </div>
     </div>
@@ -1036,7 +1148,7 @@ textarea.form-input{resize:vertical;min-height:78px;line-height:1.5}
     <div class="page" id="page-dashboard">
       <div class="page-hd">
         <div>
-          <div class="page-title" id="dash-greeting">Good morning 👋</div>
+          <div class="page-title" id="dash-greeting">Good morning</div>
           <div class="page-sub">You have 3 interviews this week and 1 pending offer. Keep going!</div>
         </div>
         <button class="btn btn-ghost btn-sm" onclick="toast('📅 Calendar synced!')">Sync Calendar</button>
@@ -1046,28 +1158,28 @@ textarea.form-input{resize:vertical;min-height:78px;line-height:1.5}
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-glow" style="background:var(--accent)"></div>
-          <div class="stat-emoji">📋</div>
+          <div class="stat-emoji"><i class="ic" data-ic="doc" data-sz="20"></i></div>
           <div class="stat-num" id="stat-total">47</div>
           <div class="stat-lbl">Total Applications</div>
           <div class="stat-chg chg-up">↑ 12 this month</div>
         </div>
         <div class="stat-card">
           <div class="stat-glow" style="background:var(--green)"></div>
-          <div class="stat-emoji">🎙️</div>
+          <div class="stat-emoji"><i class="ic" data-ic="mic" data-sz="20"></i></div>
           <div class="stat-num" id="stat-interviews">0</div>
           <div class="stat-lbl">Interviews Scheduled</div>
           <div class="stat-chg chg-up">↑ 3 this week</div>
         </div>
         <div class="stat-card">
           <div class="stat-glow" style="background:var(--amber)"></div>
-          <div class="stat-emoji">✅</div>
+          <div class="stat-emoji"><i class="ic" data-ic="check" data-sz="20"></i></div>
           <div class="stat-num" id="stat-offers">0</div>
           <div class="stat-lbl">Offers Received</div>
           <div class="stat-chg chg-up">↑ 1 new offer</div>
         </div>
         <div class="stat-card">
           <div class="stat-glow" style="background:var(--pink)"></div>
-          <div class="stat-emoji">📈</div>
+          <div class="stat-emoji"><i class="ic" data-ic="analytics" data-sz="20"></i></div>
           <div class="stat-num" id="stat-success">0%</div>
           <div class="stat-lbl">Success Rate</div>
           <div class="stat-chg chg-up">↑ 5% vs last month</div>
@@ -1104,10 +1216,10 @@ textarea.form-input{resize:vertical;min-height:78px;line-height:1.5}
         </div>
         <div class="card card-pad">
           <div class="card-title" style="margin-bottom:14px">Funnel Progress</div>
-          <div class="prog-row"><div class="prog-hd"><span class="prog-label">Applied</span><span class="prog-val">28</span></div><div class="progress"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,var(--blue),var(--cyan))"></div></div></div>
+          <div class="prog-row"><div class="prog-hd"><span class="prog-label">Applied</span><span class="prog-val">28</span></div><div class="progress"><div class="progress-fill" style="width:100%;background:var(--blue)"></div></div></div>
           <div class="prog-row"><div class="prog-hd"><span class="prog-label">Reviewing</span><span class="prog-val">9</span></div><div class="progress"><div class="progress-fill" style="width:65%;background:linear-gradient(90deg,var(--amber),#f97316)"></div></div></div>
           <div class="prog-row"><div class="prog-hd"><span class="prog-label">Interview</span><span class="prog-val">5</span></div><div class="progress"><div class="progress-fill" style="width:40%;background:linear-gradient(90deg,var(--green),#10b981)"></div></div></div>
-          <div class="prog-row"><div class="prog-hd"><span class="prog-label">Offers</span><span class="prog-val">3</span></div><div class="progress"><div class="progress-fill" style="width:22%;background:linear-gradient(90deg,var(--accent),var(--pink))"></div></div></div>
+          <div class="prog-row"><div class="prog-hd"><span class="prog-label">Offers</span><span class="prog-val">3</span></div><div class="progress"><div class="progress-fill" style="width:22%;background:var(--accent)"></div></div></div>
           <div class="prog-row"><div class="prog-hd"><span class="prog-label">Rejected</span><span class="prog-val">12</span></div><div class="progress"><div class="progress-fill" style="width:50%;background:linear-gradient(90deg,var(--red),#f97316)"></div></div></div>
           <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border)">
             <div style="font-size:11px;color:var(--text3);margin-bottom:8px;font-weight:600;letter-spacing:.5px;text-transform:uppercase">Upcoming Deadlines</div>
@@ -1125,7 +1237,7 @@ textarea.form-input{resize:vertical;min-height:78px;line-height:1.5}
           <div class="page-title">Job Applications</div>
           <div class="page-sub">Track every opportunity, all in one place</div>
         </div>
-        <button class="btn btn-primary" onclick="openModal()">+ Add Application</button>
+        <button class="btn btn-primary" onclick="openModal()"><i class="ic" data-ic="plus" data-sz="16"></i><span class="hide-sm">Add application</span></button>
       </div>
       <div class="card" style="overflow:hidden">
         <div class="table-filters">
@@ -1139,8 +1251,8 @@ textarea.form-input{resize:vertical;min-height:78px;line-height:1.5}
             <button class="chip" onclick="filterJobs('hired',this)">Hired</button>
           </div>
           <div style="display:flex;gap:8px">
-            <button class="icon-btn" onclick="toast('📤 Exported to CSV!')">📤</button>
-            <button class="icon-btn" onclick="toast('🔽 Sorted by date!')">⇅</button>
+            <button class="icon-btn" aria-label="Export CSV" onclick="toast('📤 Exported to CSV')"><i class="ic" data-ic="export" data-sz="18"></i></button>
+            <button class="icon-btn" aria-label="Sort by date" onclick="toast('🔽 Sorted by date')"><i class="ic" data-ic="sort" data-sz="18"></i></button>
           </div>
         </div>
         <div class="table-wrap">
@@ -1168,7 +1280,7 @@ textarea.form-input{resize:vertical;min-height:78px;line-height:1.5}
           <div class="page-title">Kanban Board</div>
           <div class="page-sub">Drag applications between stages</div>
         </div>
-        <button class="btn btn-primary" onclick="openModal()">+ Add Application</button>
+        <button class="btn btn-primary" onclick="openModal()"><i class="ic" data-ic="plus" data-sz="16"></i><span class="hide-sm">Add application</span></button>
       </div>
       <div class="kanban-scroll">
         <div class="kanban-board" id="kanban-board"></div>
@@ -1185,45 +1297,45 @@ textarea.form-input{resize:vertical;min-height:78px;line-height:1.5}
       </div>
       <div class="ai-grid">
         <div class="ai-card c-purple" onclick="runAI('resume')">
-          <div class="ai-emoji">📄</div>
+          <div class="ai-emoji"><i class="ic" data-ic="doc" data-sz="24"></i></div>
           <div class="ai-title">Resume Analyzer</div>
           <div class="ai-desc">ATS score, keyword gaps, and tailored improvement tips for your resume.</div>
-          <div class="ai-link">Analyze Resume →</div>
+          <div class="ai-link">Analyze Resume</div>
         </div>
         <div class="ai-card c-green" onclick="runAI('match')">
-          <div class="ai-emoji">🎯</div>
+          <div class="ai-emoji"><i class="ic" data-ic="target" data-sz="24"></i></div>
           <div class="ai-title">Job Match Score</div>
           <div class="ai-desc">See how well your profile matches a job description with AI percentage scoring.</div>
-          <div class="ai-link">Check Match →</div>
+          <div class="ai-link">Check Match</div>
         </div>
         <div class="ai-card c-cyan" onclick="runAI('cover')">
-          <div class="ai-emoji">✍️</div>
+          <div class="ai-emoji"><i class="ic" data-ic="pen" data-sz="24"></i></div>
           <div class="ai-title">Cover Letter Generator</div>
           <div class="ai-desc">Generate tailored, compelling cover letters for any role in seconds.</div>
-          <div class="ai-link">Generate Letter →</div>
+          <div class="ai-link">Generate Letter</div>
         </div>
         <div class="ai-card c-pink" onclick="runAI('interview')">
-          <div class="ai-emoji">🎙️</div>
+          <div class="ai-emoji"><i class="ic" data-ic="mic" data-sz="24"></i></div>
           <div class="ai-title">Interview Prep</div>
           <div class="ai-desc">Role-specific behavioral and technical questions with coaching on what interviewers seek.</div>
-          <div class="ai-link">Start Prep →</div>
+          <div class="ai-link">Start Prep</div>
         </div>
         <div class="ai-card c-amber" onclick="runAI('keywords')">
-          <div class="ai-emoji">🔑</div>
+          <div class="ai-emoji"><i class="ic" data-ic="key" data-sz="24"></i></div>
           <div class="ai-title">ATS Optimizer</div>
           <div class="ai-desc">Keyword analysis and formatting tips to get past applicant tracking systems.</div>
-          <div class="ai-link">Optimize →</div>
+          <div class="ai-link">Optimize</div>
         </div>
         <div class="ai-card c-blue" onclick="runAI('salary')">
-          <div class="ai-emoji">💰</div>
+          <div class="ai-emoji"><i class="ic" data-ic="money" data-sz="24"></i></div>
           <div class="ai-title">Salary Negotiation</div>
           <div class="ai-desc">Data-driven market ranges and negotiation scripts to maximize your offer.</div>
-          <div class="ai-link">Negotiate →</div>
+          <div class="ai-link">Negotiate</div>
         </div>
       </div>
       <div class="ai-result" id="ai-result">
         <div class="ai-result-hd">
-          <span style="font-size:18px">🤖</span>
+          <span class="ai-res-ic"><i class="ic" data-ic="robot" data-sz="20"></i></span>
           <div class="ai-result-title" id="ai-result-title">AI Analysis</div>
           <div class="typing-cur" id="ai-cursor" style="display:none"></div>
         </div>
@@ -1274,7 +1386,7 @@ textarea.form-input{resize:vertical;min-height:78px;line-height:1.5}
           <div class="card card-pad">
             <div class="card-title">Subscription</div>
             <div class="sub-badge">
-              <div class="sub-plan">✦ Pro Plan</div>
+              <div class="sub-plan">Pro Plan</div>
               <div class="sub-meta">Renews June 1, 2025 · $12/mo</div>
               <div class="sub-desc">Unlimited applications, full AI access, advanced analytics, priority support.</div>
             </div>
@@ -1292,8 +1404,8 @@ textarea.form-input{resize:vertical;min-height:78px;line-height:1.5}
 <div class="overlay" id="modal" onclick="handleOverlayClick(event)">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-hd">
-      <div class="modal-title" id="modal-title">✚ Add New Application</div>
-      <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+      <div class="modal-title" id="modal-title">Add a new application</div>
+      <button class="modal-close" onclick="closeModal()" aria-label="Close"><i class="ic" data-ic="x" data-sz="16"></i></button>
     </div>
     <div class="modal-body">
       <div class="form-row">
@@ -1329,18 +1441,82 @@ textarea.form-input{resize:vertical;min-height:78px;line-height:1.5}
     </div>
     <div class="modal-ft">
       <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-primary" onclick="addJob()">✚ Save Application</button>
+      <button class="btn btn-primary" onclick="addJob()">Save application</button>
     </div>
   </div>
 </div>
 
 <!-- ═══════════════ TOAST ═══════════════ -->
 <div class="toast" id="toast-el" role="alert" aria-live="polite">
-  <span class="toast-icon" id="toast-icon">✅</span>
+  <span class="toast-icon" id="toast-icon"></span>
   <span id="toast-text">Done!</span>
 </div>
 
 <script>
+// Small stroke icon set (24px grid, 1.8 stroke) used across the app chrome.
+const ICON_PATHS = {
+  dashboard: '<rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/>',
+  transactions: '<path d="M4 8h14l-4-4M20 16H6l4 4"/>',
+  budget: '<circle cx="12" cy="12" r="9"/><path d="M12 3v9l6.5 6.2"/>',
+  savings: '<path d="M5 11a7 7 0 0 1 12.5-4.3L20 6v5h-2.2A7 7 0 0 1 15 17v3h-3v-2h-2v2H7v-3.3A7 7 0 0 1 5 11z"/><circle cx="15" cy="10" r=".8" fill="currentColor"/>',
+  analytics: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+  reports: '<path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
+  subscriptions: '<path d="M20 11a8 8 0 0 0-14.7-4.3M4 4v4h4M4 13a8 8 0 0 0 14.7 4.3M20 20v-4h-4"/>',
+  calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+  settings: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-2.9 1.2V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-2.9-1.2l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.7 1.7 0 0 0 3 14.6H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.2-2.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.7 1.7 0 0 0 10 3.6V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 2.9 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0 1.2 2.9H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>',
+  profile: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  logout: '<path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l-5-5 5-5M5 12h11"/>',
+  menu: '<path d="M4 6h16M4 12h16M4 18h16"/>',
+  search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>',
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+  moon: '<path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/>',
+  bell: '<path d="M6 9a6 6 0 0 1 12 0c0 6 2.5 7.5 2.5 7.5h-17S6 15 6 9zM10 20a2 2 0 0 0 4 0"/>',
+  close: '<path d="M6 6l12 12M18 6L6 18"/>',
+  edit: '<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
+  bank: '<path d="M3 10l9-6 9 6M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 21h18"/>',
+  chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+  target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/>',
+  download: '<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>',
+  arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+  up: '<path d="M12 19V5M6 11l6-6 6 6"/>',
+  down: '<path d="M12 5v14M6 13l6 6 6-6"/>',
+  check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  alert: '<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/>',
+  spark: '<path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4z"/>',
+  brain: '<path d="M9 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 2 5 3 3 0 0 0 6 0V7a3 3 0 0 0-3-3zM15 4a3 3 0 0 1 3 3 3 3 0 0 1 2 5 3 3 0 0 1-2 5 3 3 0 0 1-6 0"/>',
+  bulb: '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/>',
+  trophy: '<path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H4a3 3 0 0 0 4 4M16 6h4a3 3 0 0 1-4 4M12 13v4M8 21h8M9 17h6v4H9z"/>',
+  card: '<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/>',
+  shield: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
+  gear: '<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>',
+  receipt: '<path d="M6 3h12v18l-2-1.5L14 21l-2-1.5L10 21l-2-1.5L6 21z"/><path d="M9 8h6M9 12h6"/>',
+  inbox: '<path d="M3 13l3-8h12l3 8v6H3z"/><path d="M3 13h5l1 3h6l1-3h5"/>',
+};
+function icon(name, size = 18, cls = '') {
+  return `<svg class="svg-ic ${cls}" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON_PATHS[name] || ''}</svg>`;
+}
+
+Object.assign(ICON_PATHS, {
+  home: '<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>',
+  kanban: '<rect x="3" y="4" width="5" height="16" rx="1"/><rect x="10" y="4" width="5" height="10" rx="1"/><rect x="17" y="4" width="4" height="13" rx="1"/>',
+  robot: '<rect x="4" y="8" width="16" height="12" rx="2"/><path d="M12 4v4M9 13h.01M15 13h.01M9 17h6"/>',
+  doc: '<path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>',
+  pen: '<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/>',
+  gem: '<path d="M6 3h12l3 6-9 12L3 9z"/><path d="M3 9h18M9 3l3 18 3-18"/>',
+  mic: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',
+  key: '<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3"/>',
+  money: '<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 10v4M18 10v4"/>',
+  export: '<path d="M12 15V3M7 8l5-5 5 5M5 14v6h14v-6"/>',
+  sort: '<path d="M7 4v16M3 8l4-4 4 4M17 20V4M13 16l4 4 4-4"/>',
+  briefcase: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/>',
+  folder: '<path d="M3 6a1 1 0 0 1 1-1h5l2 2h9a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/>',
+  chevron: '<path d="M6 9l6 6 6-6"/>',
+  x: '<path d="M6 6l12 12M18 6L6 18"/>',
+  linkedin: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/>',
+  github: '<path d="M9 19c-4 1.5-4-2-6-2.5M15 21v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/>',
+});
+
 /* ═══════════════════════════════════════════════
    DATA STORE
 ═══════════════════════════════════════════════ */
@@ -1352,7 +1528,7 @@ const BRAND_COLORS = {
 };
 function brandColor(name){
   const key=name.toLowerCase().split(' ')[0];
-  return BRAND_COLORS[key]||'#1E3A5F';
+  return BRAND_COLORS[key]||'#1F3A5C';
 }
 
 let jobs=[];
@@ -1437,11 +1613,11 @@ function updateUserUI(){
   const firstName=currentUser.name.split(' ')[0];
   document.getElementById('sidebar-avatar').textContent=initials;
   document.getElementById('sidebar-username').textContent=currentUser.name;
-  document.getElementById('sidebar-plan').textContent=`✦ ${currentUser.plan} Plan`;
+  document.getElementById('sidebar-plan').textContent=`${currentUser.plan} Plan`;
   document.getElementById('profile-avatar').textContent=initials;
   document.getElementById('profile-name').textContent=currentUser.name;
   document.getElementById('profile-email').textContent=currentUser.location?`${currentUser.email} · ${currentUser.location}`:currentUser.email;
-  document.getElementById('dash-greeting').textContent=`Welcome back, ${firstName} 👋`;
+  document.getElementById('dash-greeting').textContent=`Welcome back, ${firstName}`;
 }
 
 function updateKpis(){
@@ -1567,8 +1743,8 @@ let toastTimer;
 function toast(msg){
   const el=document.getElementById('toast-el');
   const parts=msg.split(' ');
-  const icon=parts[0].match(/\p{Emoji}/u)?parts.shift():'✅';
-  document.getElementById('toast-icon').textContent=icon;
+  const hint=parts[0].match(/\p{Extended_Pictographic}/u)?parts.shift():'';
+  document.getElementById('toast-icon').innerHTML=/[⚠❌]/.test(hint)?icon('alert',16):icon('check',16);
   document.getElementById('toast-text').textContent=parts.join(' ');
   el.classList.add('show');
   clearTimeout(toastTimer);
@@ -1628,7 +1804,7 @@ function renderJobs(){
   const data=activeFilter==='all'?jobs:jobs.filter(j=>j.status===activeFilter);
   const tbody=document.getElementById('jobs-body');
   if(!data.length){
-    tbody.innerHTML=`<tr><td colspan="6"><div class="empty"><div class="empty-ico">📋</div><div class="empty-title">No applications found</div><div class="empty-desc">Add your first application or try a different filter.</div></div></td></tr>`;
+    tbody.innerHTML=`<tr><td colspan="6"><div class="empty"><div class="empty-ico">${icon('folder',40)}</div><div class="empty-title">No applications found</div><div class="empty-desc">Add your first application or try a different filter.</div></div></td></tr>`;
     return;
   }
   tbody.innerHTML=data.map(j=>{
@@ -1644,7 +1820,7 @@ function renderJobs(){
       <td class="date-cell">${fmtDate(j.date)}</td>
       <td><div class="actions-cell">
         <button class="btn btn-ghost btn-sm" onclick="toast('✏️ Editing ${j.company}...')">Edit</button>
-        <button class="btn btn-danger btn-sm" onclick="deleteJob(${j.id})">✕</button>
+        <button class="btn btn-danger btn-sm" aria-label="Delete" onclick="deleteJob(${j.id})">${icon('close',14)}</button>
       </div></td>
     </tr>`;
   }).join('');
@@ -1677,7 +1853,7 @@ const COLS=[
   {id:'applied',label:'Applied',color:'#2563EB'},
   {id:'reviewing',label:'Reviewing',color:'#D97706'},
   {id:'interview',label:'Interview',color:'#059669'},
-  {id:'offer',label:'Offer',color:'#7C3AED'},
+  {id:'offer',label:'Offer',color:'#8A6A12'},
   {id:'rejected',label:'Rejected',color:'#DC2626'},
   {id:'hired',label:'Hired',color:'#0891B2'},
 ];
@@ -1754,8 +1930,8 @@ function initCharts(){
       data:{
         labels:['Jan','Feb','Mar','Apr','May','Jun'],
         datasets:[
-          {label:'Applied',data:[4,6,9,12,10,14],borderColor:'#1E3A5F',backgroundColor:'rgba(30,58,95,0.07)',fill:true,tension:.42,borderWidth:2.5,pointRadius:4,pointHoverRadius:6,pointBackgroundColor:'#1E3A5F'},
-          {label:'Interviews',data:[1,2,3,5,4,7],borderColor:'#E8A838',backgroundColor:'rgba(232,168,56,0.08)',fill:true,tension:.42,borderWidth:2.5,pointRadius:4,pointHoverRadius:6,pointBackgroundColor:'#E8A838'}
+          {label:'Applied',data:[4,6,9,12,10,14],borderColor:'#1F3A5C',backgroundColor:'rgba(30,58,95,0.07)',fill:true,tension:.42,borderWidth:2.5,pointRadius:4,pointHoverRadius:6,pointBackgroundColor:'#1F3A5C'},
+          {label:'Interviews',data:[1,2,3,5,4,7],borderColor:'#C98A12',backgroundColor:'rgba(232,168,56,0.08)',fill:true,tension:.42,borderWidth:2.5,pointRadius:4,pointHoverRadius:6,pointBackgroundColor:'#C98A12'}
         ]
       },
       options:{
@@ -1803,8 +1979,8 @@ function initCharts(){
    are kept here too so the UI still works offline.
 ═══════════════════════════════════════════════ */
 const AI_TITLES={
-  resume:'📄 Resume Analysis',match:'🎯 Job Match Score',cover:'✍️ Cover Letter Opening',
-  interview:'🎙️ Interview Prep',keywords:'🔑 ATS Keyword Analysis',salary:'💰 Salary Negotiation Guide'
+  resume:'Resume Analysis',match:'Job Match Score',cover:'Cover Letter Opening',
+  interview:'Interview Prep',keywords:'ATS Keyword Analysis',salary:'Salary Negotiation Guide'
 };
 const AI_FALLBACKS={
   resume:`ATS Score: 82/100 — Well-structured but needs optimization.\n\n• Missing keywords: "design systems", "accessibility", "cross-functional", "Figma prototyping"\n• Tip 1: Quantify every achievement — replace "improved conversion" with "increased conversion by 34% over 3 months"\n• Tip 2: Lead with a 2-line summary statement aligned to your target role\n• Tip 3: Move skills section above experience — ATS parses it first`,
@@ -1871,6 +2047,9 @@ function toggleSwitch(el){
 document.addEventListener('DOMContentLoaded',()=>{
   initAuth();
 });
+
+function hydrateIcons(root=document){root.querySelectorAll('i.ic[data-ic]').forEach(el=>{el.outerHTML=icon(el.dataset.ic, +el.dataset.sz||18);});}
+hydrateIcons();
 </script>
 </body>
 </html>
